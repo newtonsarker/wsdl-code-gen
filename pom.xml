@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.sarker</groupId>
+    <artifactId>wsdl-code-gen</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <cxf.version>3.5.0</cxf.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-codegen-plugin</artifactId>
+                <version>${cxf.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-sources</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <sourceRoot>${project.build.directory}/generated-sources/cxf</sourceRoot>
+                            <wsdlOptions>
+                                <wsdlOption>
+                                    <!--<wsdl>${basedir}/src/main/resources/wsdl/BalanceManagement.wsdl</wsdl>-->
+                                    <wsdl>${basedir}/src/main/resources/wsdl/ToyService.wsdl</wsdl>
+                                    <extraargs>
+                                        <!--https://cxf.apache.org/docs/wsdl-to-java.html-->
+
+                                        <!--Displays comments during the code generation process-->
+                                        <extraarg>-verbose</extraarg>
+
+                                        <!--Enables or disables processing of implicit SOAP headers-->
+                                        <extraarg>-exsh</extraarg>
+                                        <extraarg>true</extraarg>
+
+                                    </extraargs>
+                                </wsdlOption>
+                            </wsdlOptions>
+                        </configuration>
+                        <goals>
+                            <goal>wsdl2java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

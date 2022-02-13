@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.codegenerator.com/ToyService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ToyService" targetNamespace="http://www.codegenerator.com/ToyService/">
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://www.codegenerator.com/ToyService/">
+            <xsd:element name="Toy">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="ToyID" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="ToyName" type="xsd:string"/>
+                        <xsd:element name="Description" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="Toys">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element ref="tns:Toy" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="GetToy">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="ID" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="GetToyResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element ref="tns:Toy" minOccurs="0" maxOccurs="1"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="AddToy">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element ref="tns:Toy" minOccurs="1" maxOccurs="1"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="AddToyResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element ref="tns:Toy" minOccurs="0" maxOccurs="1"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="GetAllToys">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="GetAllToysResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element ref="tns:Toy" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="GetToyRequest">
+        <wsdl:part element="tns:GetToy" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="GetToyResponse">
+        <wsdl:part element="tns:GetToyResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="AddToyRequest">
+        <wsdl:part name="parameters" element="tns:AddToy"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="AddToyResponse">
+        <wsdl:part name="parameters" element="tns:AddToyResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="GetAllToysRequest">
+        <wsdl:part name="parameters" element="tns:GetAllToys"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="GetAllToysResponse">
+        <wsdl:part name="parameters" element="tns:GetAllToysResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="ToyService">
+        <wsdl:operation name="GetToy">
+            <wsdl:input message="tns:GetToyRequest"/>
+            <wsdl:output message="tns:GetToyResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="AddToy">
+            <wsdl:input message="tns:AddToyRequest"></wsdl:input>
+            <wsdl:output message="tns:AddToyResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetAllToys">
+            <wsdl:input message="tns:GetAllToysRequest"></wsdl:input>
+            <wsdl:output message="tns:GetAllToysResponse"></wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ToyServiceSOAP" type="tns:ToyService">
+        <soap:binding style="document"
+                      transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="GetToy">
+            <soap:operation
+                    soapAction="http://www.codegenerator.com/ToyService/GetToy"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="AddToy">
+            <soap:operation
+                    soapAction="http://www.codegenerator.com/ToyService/AddToy"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetAllToys">
+            <soap:operation
+                    soapAction="http://www.codegenerator.com/ToyService/GetAllToys"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ToyService">
+        <wsdl:port binding="tns:ToyServiceSOAP" name="ToyServiceSOAP">
+            <soap:address location="http://www.host.com/ToyService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
